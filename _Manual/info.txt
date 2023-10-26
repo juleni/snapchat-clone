@@ -1,0 +1,7 @@
+React JS Crash Course for Beginners - Build 4 Apps in 12 hours
+---------------------------------------------------------------------------------------------------
+https://www.youtube.com/watch?v=tbvguOj8C-o
+9:04:00
+
+- npx create-react-app snapchat-clone --template redux
+
