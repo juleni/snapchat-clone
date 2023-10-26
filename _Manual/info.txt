@@ -9,4 +9,5 @@ https://www.youtube.com/watch?v=tbvguOj8C-o
 
 - npm i firebase
 - npm i react-webcam
+- npm install @mui/material @emotion/react @emotion/styled @mui/icons-material
 
