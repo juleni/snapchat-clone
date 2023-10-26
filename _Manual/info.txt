@@ -5,3 +5,8 @@ https://www.youtube.com/watch?v=tbvguOj8C-o
 
 - npx create-react-app snapchat-clone --template redux
 
+# Configure Firebase (cca. 9h:05 - 9h:10)
+
+- npm i firebase
+- npm i react-webcam
+
