@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  cameraImage: null,
+  cameraImage: "",
 };
 
 export const cameraSlice = createSlice({
@@ -12,7 +12,7 @@ export const cameraSlice = createSlice({
       state.cameraImage += action.payload;
     },
     resetCameraImage: (state) => {
-      state.cameraImage = null;
+      state.cameraImage = "";
     },
   },
 });
