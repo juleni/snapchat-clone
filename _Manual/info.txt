@@ -1,7 +1,7 @@
 React JS Crash Course for Beginners - Build 4 Apps in 12 hours
 ---------------------------------------------------------------------------------------------------
 https://www.youtube.com/watch?v=tbvguOj8C-o
-9:36:00
+10:06:00
 
 - npx create-react-app snapchat-clone --template redux
 
@@ -11,4 +11,5 @@ https://www.youtube.com/watch?v=tbvguOj8C-o
 - npm i react-webcam
 - npm i @mui/material @emotion/react @emotion/styled @mui/icons-material
 - npm i react-router-dom
+- npm i uuid
 
