@@ -8,5 +8,6 @@
   left: 50%;
   transform: translate(-50%, -50%);
   cursor: pointer;
-  color: lightgreen;
+  color: rgb(255, 227, 15);
+  height: 100vh;
 }
