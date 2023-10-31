@@ -1,0 +1,42 @@
+.chats {
+  position: relative;
+  height: 400px;
+  width: 270px;
+}
+
+.chats__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-left: 10px;
+  padding-right: 10px;
+  background-color: #059ee0;
+  height: 50px;
+}
+
+.chats__search {
+  display: flex;
+  align-items: center;
+  flex: 1;
+  padding-left: 8px;
+}
+
+.chats__search > input {
+  outline: none;
+  background-color: transparent;
+  border: none;
+  font-size: 12px;
+  flex: 1;
+  color: white;
+}
+
+.chats__search > input::placeholder {
+  color: white;
+  opacity: 1;
+}
+
+.chats__avatar {
+}
+
+.chats__chatIcon {
+}
