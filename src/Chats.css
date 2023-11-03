@@ -35,7 +35,26 @@
   opacity: 1;
 }
 
+.chats__posts {
+  height: 359px;
+  background-color: white;
+  box-shadow: 1px -7px 7px -6px rgba(0, 0, 0, 0.44);
+  margin-top: -9px;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  overflow: scroll;
+
+  -ms-overflow-style: none; /** IE and Edge */
+  scrollbar-width: none; /** Firefox */
+}
+
+.chats__posts::-webkit-scrollbar {
+  display: none;
+}
+
 .chats__avatar {
+  width: 25px !important;
+  height: 25px !important;
 }
 
 .chats__chatIcon {
