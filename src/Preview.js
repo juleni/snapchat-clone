@@ -52,7 +52,7 @@ function Preview() {
             imageUrl: downloadURL,
             userName: "Juleni Dev",
             read: false,
-            // profilePic,
+            profilePic: "",
             timestamp: serverTimestamp(),
           });
           navigate("/chats", { replace: true });
