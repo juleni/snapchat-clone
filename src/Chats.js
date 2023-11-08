@@ -1,7 +1,7 @@
 import ChatBubbleIcon from "@mui/icons-material/ChatBubble";
 import SearchIcon from "@mui/icons-material/Search";
 import { Avatar } from "@mui/material";
-import { collection, onSnapshot, orderBy, query } from "firebase/firestore";
+import { collection, getDocs, orderBy, query } from "firebase/firestore";
 
 import React, { useEffect, useState } from "react";
 import Chat from "./Chat";
@@ -13,56 +13,25 @@ function Chats() {
 
   useEffect(() => {
     //console.log("--- Chats useEffect");
-    /**
+
     const getData = async () => {
       try {
         //console.log("getdata --- q  = ", q);
         const querySnapshot = await getDocs(q);
         //console.log("querySnapshot=", querySnapshot);
         //console.log("querySnapshot.docs=", querySnapshot.docs);
-
-        querySnapshot.forEach((doc) => {
-          console.log(doc.id, " => ", doc.data());
-          setPosts([
-            {
-              id: doc.id,
-              data: doc.data(),
-            },
-          ]);
-          console.log("INSIDE posts=", posts);
-        });
-        console.log("INSIDE posts1 =", posts);
-
-        //querySnapshot.docs.map((doc) => ())
-
-        //querySnapshot.forEach((doc) => {
-        // doc.data() is never undefined for query doc snapshots
-        //console.log(doc.id, " => ", doc.data());
-        //setPosts()
-        //});
+        setPosts(
+          querySnapshot.docs.map((doc) => ({ id: doc.id, data: doc.data() }))
+        );
       } catch (error) {
         console.log("Error getting Documents", error);
       }
     };
- */
+
     const postsRef = collection(db, "posts");
     //console.log("postsRef=", postsRef);
     const q = query(postsRef, orderBy("timestamp", "desc"));
-    onSnapshot(q, (querySnapshot) => {
-      querySnapshot.forEach((doc) => {
-        //console.log("doc=", doc);
-        // console.log(doc.id, " => ", doc.data());
-        setPosts([
-          {
-            id: doc.id,
-            data: doc.data(),
-          },
-        ]);
-      });
-      //console.log("INSIDE posts=", posts);
-    });
-
-    //getData();
+    getData();
     //console.log("posts=", posts);
   }, []);
 
