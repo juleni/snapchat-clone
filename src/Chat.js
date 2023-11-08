@@ -12,11 +12,11 @@ import { db } from "./firebase";
 function Chat({ id, userName, timestamp, read, imageUrl, profilePic }) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  console.log("--- Chat ---");
+  // console.log("--- Chat ---");
 
   const open = async () => {
-    console.log("---OPEN read=", read);
-    console.log("---imageUrl=", imageUrl);
+    // console.log("---OPEN read=", read);
+    // console.log("---imageUrl=", imageUrl);
     if (!read) {
       dispatch(selectImage(imageUrl));
       const docRef = doc(db, "posts", id);
