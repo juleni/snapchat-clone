@@ -49,7 +49,7 @@ function Preview() {
       console.log("snapshot.ref=", snapshot.ref);
       getDownloadURL(snapshot.ref).then((downloadURL) => {
         // console.log("File available at", downloadURL);
-        setDoc(doc(db, "posts", "image"), {
+        setDoc(doc(db, "posts", id), {
           imageUrl: downloadURL,
           userName: "Juleni Dev",
           read: false,
