@@ -17,6 +17,7 @@ function App() {
 
   useEffect(() => {
     onAuthStateChanged(auth, (authUser) => {
+      // console.log("authUser", authUser);
       if (authUser) {
         // User is signed in
         dispatch(
@@ -38,14 +39,19 @@ function App() {
       {!user ? (
         <Login />
       ) : (
-        <div className="app_body">
-          <Routes>
-            <Route path="/" element={<WebcamCapture />} />
-            <Route path="/preview" element={<Preview />} />
-            <Route path="/chats" element={<Chats />} />
-            <Route path="/chats/view" element={<ChatView />} />
-          </Routes>
-        </div>
+        <>
+          <img src="snapchat.png" className="app__logo" alt="" />
+          <div className="app__body">
+            <div className="app__bodyBackground">
+              <Routes>
+                <Route path="/" element={<WebcamCapture />} />
+                <Route path="/preview" element={<Preview />} />
+                <Route path="/chats" element={<Chats />} />
+                <Route path="/chats/view" element={<ChatView />} />
+              </Routes>
+            </div>
+          </div>
+        </>
       )}
     </div>
   );
