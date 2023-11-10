@@ -1,4 +1,3 @@
-import { uploadString } from "@firebase/storage";
 import AttachFileIcon from "@mui/icons-material/AttachFile";
 import CloseIcon from "@mui/icons-material/Close";
 import CreateIcon from "@mui/icons-material/Create";
@@ -9,11 +8,12 @@ import SendIcon from "@mui/icons-material/Send";
 import TextFieldsIcon from "@mui/icons-material/TextFields";
 import TimerIcon from "@mui/icons-material/Timer";
 import { doc, serverTimestamp, setDoc } from "firebase/firestore";
-import { getDownloadURL, ref } from "firebase/storage";
+import { getDownloadURL, ref, uploadString } from "firebase/storage";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { v4 as uuid } from "uuid";
+import { selectUser } from "./features/appSlice";
 import { resetCameraImage, selectCameraImage } from "./features/cameraSlice";
 import { db, storage } from "./firebase";
 
@@ -21,6 +21,7 @@ import "./Preview.css";
 
 function Preview() {
   const cameraImage = useSelector(selectCameraImage);
+  const user = useSelector(selectUser);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -32,34 +33,33 @@ function Preview() {
     dispatch(resetCameraImage());
   };
 
-  const sendPost = async () => {
+  const sendPost = () => {
     const id = uuid();
     const imageRef = ref(storage, `posts/${id}`);
     //const uploadTask = uploadBytesResumable(imageRef, cameraImage);
     // console.log("cameraImage=", cameraImage);
-    const uploadTask = await uploadString(
-      imageRef,
-      cameraImage,
-      "data_url"
-    ).then((snapshot) => {
-      // console.log("uploadTask=", uploadTask);
-      // console.log("posts/Id=", `posts/${id}`);
-      // console.log("cameraImage=", cameraImage);
-      console.log("snapshot=", snapshot);
-      console.log("snapshot.ref=", snapshot.ref);
-      getDownloadURL(snapshot.ref).then((downloadURL) => {
-        // console.log("File available at", downloadURL);
-        setDoc(doc(db, "posts", id), {
-          imageUrl: downloadURL,
-          userName: "Juleni Dev",
-          read: false,
-          profilePic: "",
-          timestamp: serverTimestamp(),
+    const uploadTask = uploadString(imageRef, cameraImage, "data_url").then(
+      (snapshot) => {
+        // console.log("uploadTask=", uploadTask);
+        // console.log("posts/Id=", `posts/${id}`);
+        // console.log("cameraImage=", cameraImage);
+        // console.log("snapshot=", snapshot);
+        // console.log("snapshot.ref=", snapshot.ref);
+        getDownloadURL(snapshot.ref).then((downloadURL) => {
+          // console.log("File available at", downloadURL);
+          setDoc(doc(db, "posts", id), {
+            imageUrl: downloadURL,
+            userName: "Juleni Dev",
+            read: false,
+            profilePic: user.profilePic,
+            timestamp: serverTimestamp(),
+          });
         });
-      });
-      navigate("/chats", { replace: true });
-    });
+        navigate("/chats", { replace: true });
+      }
+    );
     /*
+    const uploadTask = uploadBytesResumable(imageRef, cameraImage, "data_url");
     uploadTask.on(
       "state_changed",
       (snapshot) => {
@@ -78,11 +78,11 @@ function Preview() {
         console.log("COMPLETE");
         getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
           // console.log("File available at", downloadURL);
-          setDoc(doc(db, "posts", "image"), {
+          setDoc(doc(db, "posts", id), {
             imageUrl: downloadURL,
             userName: "Juleni Dev",
             read: false,
-            profilePic: "",
+            profilePic: user.profilePic,
             timestamp: serverTimestamp(),
           });
           navigate("/chats", { replace: true });
