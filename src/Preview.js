@@ -49,7 +49,7 @@ function Preview() {
           // console.log("File available at", downloadURL);
           setDoc(doc(db, "posts", id), {
             imageUrl: downloadURL,
-            userName: "Juleni Dev",
+            userName: user.username,
             read: false,
             profilePic: user.profilePic,
             timestamp: serverTimestamp(),
