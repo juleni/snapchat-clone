@@ -10,6 +10,7 @@ import { useNavigate } from "react-router-dom";
 import Chat from "./Chat";
 import "./Chats.css";
 import { selectUser } from "./features/appSlice";
+import { resetCameraImage } from "./features/cameraSlice";
 import { auth, db } from "./firebase";
 
 function Chats() {
@@ -30,19 +31,21 @@ function Chats() {
         setPosts(
           querySnapshot.docs.map((doc) => ({ id: doc.id, data: doc.data() }))
         );
+        //console.log("INSIDE posts=", posts);
       } catch (error) {
         console.log("Error getting Documents", error);
       }
     };
 
     const postsRef = collection(db, "posts");
-    //console.log("postsRef=", postsRef);
     const q = query(postsRef, orderBy("timestamp", "desc"));
     getData();
-    //console.log("posts=", posts);
+
+    // console.log("posts=", posts);
   }, []);
 
   const takeSnap = () => {
+    dispatch(resetCameraImage());
     navigate("/", { replace: true });
   };
   return (
